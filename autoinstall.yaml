@@ -29,24 +29,4 @@ autoinstall:
     - ubuntu-cinnamon-desktop
     - libreoffice
 
-  late-commands:
-    - curtin in-target --target=/target -- apt update
-
-    - curtin in-target --target=/target -- bash -c |
-        wget -qO /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-        apt install -y /tmp/chrome.deb
-
-    - curtin in-target --target=/target -- mkdir -p /usr/share/backgrounds/custom
-
-    - curtin in-target --target=/target -- wget -O /usr/share/backgrounds/custom/wallpaper.jpg \
-        https://i.pinimg.com/1200x/d8/50/07/d85007a5b959ea2910617bf524264ee3.jpg
-
-    - curtin in-target --target=/target -- bash -c |
-        mkdir -p /home/pablo/.config/dconf
-        cat > /home/pablo/.config/dconf/user <<EOF
-[org/cinnamon/desktop/background]
-picture-uri="file:///usr/share/backgrounds/custom/wallpaper.jpg"
-EOF
-        chown -R pablo:pablo /home/pablo/.config
-
   shutdown: reboot
