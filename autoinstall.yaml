@@ -16,9 +16,6 @@ autoinstall:
     password: "$6$O9J16PHfuhUnG4Yc$97fY6ghpOMhkfK8SqjGt479pOXpCihJVWBKVbbBQJDw.HbF7ddY1LLzUDl5TyVq/513SdBsrpn4Mwwygdx0HQ/"
     hostname: mtlnx001
 
-  source:
-    id: ubuntu-cinnamon-desktop
-
   storage:
     layout:
       name: lvm
@@ -29,33 +26,27 @@ autoinstall:
     preserve_sources: false
 
   packages:
+    - ubuntu-cinnamon-desktop
     - libreoffice
 
   late-commands:
-    # Ensure network + package lists are ready
     - curtin in-target --target=/target -- apt update
-    
-    # Install Google Chrome (official)
-    - curtin in-target --target=/target -- bash -c '
-        wget -qO /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb &&
-        apt install -y /tmp/chrome.deb
-      '
 
-    # Create custom wallpaper directory
+    - curtin in-target --target=/target -- bash -c |
+        wget -qO /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        apt install -y /tmp/chrome.deb
+
     - curtin in-target --target=/target -- mkdir -p /usr/share/backgrounds/custom
 
-    # Download wallpaper
     - curtin in-target --target=/target -- wget -O /usr/share/backgrounds/custom/wallpaper.jpg \
         https://i.pinimg.com/1200x/d8/50/07/d85007a5b959ea2910617bf524264ee3.jpg
 
-    # Apply wallpaper for Cinnamon via dconf (correct method)
-    - curtin in-target --target=/target -- bash -c '
-        mkdir -p /home/pablo/.config/dconf &&
+    - curtin in-target --target=/target -- bash -c |
+        mkdir -p /home/pablo/.config/dconf
         cat > /home/pablo/.config/dconf/user <<EOF
 [org/cinnamon/desktop/background]
 picture-uri="file:///usr/share/backgrounds/custom/wallpaper.jpg"
 EOF
         chown -R pablo:pablo /home/pablo/.config
-      '
 
   shutdown: reboot
