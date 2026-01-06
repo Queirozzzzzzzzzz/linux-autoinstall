@@ -10,6 +10,14 @@ autoinstall:
 
   timezone: America/Sao_Paulo
 
+  network:
+  version: 2
+  ethernets:
+    all:
+      match:
+        name: "*"
+      dhcp4: true
+
   identity:
     realname: "Pablo Pablovich"
     username: pablo
