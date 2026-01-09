@@ -9,17 +9,16 @@ autoinstall:
     variant: ""
 
   timezone: America/Sao_Paulo
-
+  
   network:
-  version: 2
-  ethernets:
-    all:
-      match:
-        name: "*"
-      dhcp4: true
+    version: 2
+    ethernets:
+      all:
+        match:
+          name: "*"
+        dhcp4: true
 
   identity:
-    realname: "User"
     username: user
     password: "$6$RSfUJT7WiW2AdbDl$xrTaJz8FqeBQSt4mxpXy1EnMKForuhBR/ovAXSgB.gTpr75EzC6/BTLOTbkYK8n9h6pxBPUAVNQYoOK0VAlgu1"
     hostname: linux
