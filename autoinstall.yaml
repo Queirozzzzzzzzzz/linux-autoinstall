@@ -19,10 +19,10 @@ autoinstall:
       dhcp4: true
 
   identity:
-    realname: "Pablo Pablovich"
-    username: pablo
-    password: "$6$O9J16PHfuhUnG4Yc$97fY6ghpOMhkfK8SqjGt479pOXpCihJVWBKVbbBQJDw.HbF7ddY1LLzUDl5TyVq/513SdBsrpn4Mwwygdx0HQ/"
-    hostname: mtlnx001
+    realname: "User"
+    username: user
+    password: "$6$RSfUJT7WiW2AdbDl$xrTaJz8FqeBQSt4mxpXy1EnMKForuhBR/ovAXSgB.gTpr75EzC6/BTLOTbkYK8n9h6pxBPUAVNQYoOK0VAlgu1"
+    hostname: linux
 
   storage:
     layout:
@@ -32,9 +32,5 @@ autoinstall:
   apt:
     geoip: true
     preserve_sources: false
-
-  packages:
-    - ubuntu-cinnamon-desktop
-    - libreoffice
 
   shutdown: reboot
